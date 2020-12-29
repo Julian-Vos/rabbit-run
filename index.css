@@ -56,8 +56,9 @@ body[data-screen='menu'] #menu {
 body[data-screen='menu'] #credits,
 body[data-screen='settings'] #credits {
   bottom: 0;
-  color: #1e2a10;
+  color: #838181;
   display: initial;
+  font-size: 75%;
   position: absolute;
   text-align: center;
   width: 100%;

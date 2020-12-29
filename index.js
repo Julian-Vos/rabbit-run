@@ -60,7 +60,7 @@
   const audio = {
     music: new Audio('sounds/RR FULL.mp3'),
     sounds: {
-      bird: ['RR VOGEL', 0.4],
+      bird: ['RR VOGEL 2', 'RR VOGEL 2', 0.5],
       carrot: ['WORTEL1', 'WORTEL2', 'WORTEL3', 0.8]
     },
     load: function() {
@@ -81,14 +81,16 @@
         }
       }
     },
-    fadeIn: function() {
-      if ((this.music.volume += 0.02) < 0.29) {
-        this.timeout = setTimeout(() => this.fadeIn(), 50);
+    fadeIn: function(target) {
+      if ((this.music.volume += 0.02) < target - 0.01) {
+        this.timeout = setTimeout(() => this.fadeIn(target), 50);
       }
     },
-    fadeOut: function() {
-      if ((this.music.volume -= 0.02) > 0.11) {
-        this.timeout = setTimeout(() => this.fadeOut(), 50);
+    fadeOut: function(target) {
+      if ((this.music.volume -= 0.02) > target + 0.01) {
+        this.timeout = setTimeout(() => this.fadeOut(target), 50);
+      } else if (target === 0) {
+        this.music.pause();
       }
     },
     play: function(sound) {
@@ -131,19 +133,23 @@
     graphics: [[1, 'NORMAL'], [0.5, 'LOW']],
     persistence: [[false, 'NO'], [true, 'YES']],
     rotate: function(setting) {
-      if (setting === 'audio') {
-        if (this.audio[0][0]) {
-          audio.music.pause();
-        } else if (audio.music.currentTime > 0) {
-          audio.music.play();
-        }
-      } else if (setting === 'persistence') {
+      if (setting === 'persistence') {
         if (this.persistence[0][0]) {
           personalBest.time = Infinity;
 
           localStorage.clear();
         } else if (personalBest.time < Infinity) {
           localStorage.setItem('personalBest', JSON.stringify(personalBest));
+        }
+      } else if (setting === 'audio' && audio.music.currentTime > 0) {
+        clearTimeout(audio.timeout);
+
+        if (this.audio[0][0]) {
+          audio.fadeOut(0);
+        } else {
+          audio.fadeIn(0.1);
+
+          audio.music.play();
         }
       }
 
@@ -637,11 +643,11 @@
       document.body.dataset.screen = 'menu';
 
       clearTimeout(audio.timeout);
-      audio.fadeOut();
+      audio.fadeOut(0.1);
     });
 
     clearTimeout(audio.timeout);
-    audio.fadeIn();
+    audio.fadeIn(0.3);
 
     if (settings.audio[0][0]) {
       audio.music.play();
