@@ -1,0 +1,185 @@
+body {
+  background: linear-gradient(#adecfd, #cef3fc);
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+#logo, #menu, #credits,
+#back, #keys, #values,
+canvas, #counter, #stopwatch, #countdown,
+#done {
+  display: none;
+}
+
+body[data-screen='menu'] #logo {
+  display: initial;
+  left: 50%;
+  position: absolute;
+  top: 10%;
+  transform: translateX(-50%);
+}
+
+body[data-screen='menu'] #menu {
+  display: initial;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 55%;
+  transform: translate(-50%, -50%);
+}
+
+#play,
+#settings {
+  transform: scale(0.7);
+}
+
+#settings {
+  margin-top: 30px;
+}
+
+#play:hover,
+#settings:hover {
+  cursor: pointer;
+}
+
+#play:hover::before,
+#settings:hover::before {
+  content: url('images/WORTEL.png');
+  position: absolute;
+  top: 50%;
+  transform: translate(-100%, -50%) scale(0.5);
+}
+
+body[data-screen='menu'] #credits,
+body[data-screen='settings'] #credits {
+  bottom: 0;
+  color: #1e2a10;
+  display: initial;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+#loader {
+  background-color: #80c639;
+  height: 10px;
+  margin-top: 10px;
+}
+
+body[data-screen='settings'] #back {
+  cursor: pointer;
+  display: initial;
+  left: 50%;
+  position: absolute;
+  top: 10%;
+  transform: translateX(-50%) scale(0.5);
+}
+
+body[data-screen='settings'] #keys,
+body[data-screen='settings'] #values {
+  display: initial;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#keys {
+  right: 45%;
+  text-align: right;
+}
+
+#values {
+  left: 65%;
+}
+
+#keys > div {
+  height: 95px;
+  transform: translateX(25%) scale(0.5);
+}
+
+#values > div {
+  height: 95px;
+  transform: translateX(-25%) scale(0.5);
+}
+
+#values > div:hover {
+  cursor: pointer;
+}
+
+#values > div:hover::before {
+  content: url('images/WORTEL.png');
+  position: absolute;
+  top: 50%;
+  transform: translate(-100%, -50%) scale(0.5);
+}
+
+body[data-screen='game'] canvas,
+body[data-screen='done'] canvas {
+  display: block;
+  transform-origin: top left;
+}
+
+body[data-screen='game'] #counter,
+body[data-screen='game'] #stopwatch {
+  color: #1e2a10;
+  display: initial;
+  font-size: 300%;
+  position: absolute;
+  top: 25px;
+}
+
+#counter {
+  left: 25px;
+}
+
+#counter > img {
+  margin-right: 10px;
+  vertical-align: bottom;
+}
+
+#stopwatch {
+  right: 25px;
+}
+
+#countdown {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+}
+
+body[data-screen='done'] #done {
+  color: #838181;
+  display: initial;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+#best {
+  font-size: 300%;
+}
+
+#time {
+  font-size: 600%;
+  margin: 30px 0 20px;
+}
+
+#exit,
+#retry {
+  transform: scale(0.7);
+}
+
+#retry {
+  vertical-align: top;
+}
+
+#exit:hover,
+#retry:hover {
+  cursor: pointer;
+}
